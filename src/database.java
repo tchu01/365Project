@@ -1,3 +1,5 @@
+package src;
+
 import java.sql.*;
 
 class database {
@@ -16,6 +18,9 @@ class database {
                 int customerID = rs.getInt(1);
                 System.out.println("Customer id: " + customerID);
             }
+            statement.close();
+
+            connect.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Could not load JDBC driver");
             System.err.println("Exception: " + e);
