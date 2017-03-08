@@ -36,6 +36,15 @@ CREATE TABLE Textbook (
 	Price REAL
 );
 
+CREATE TABLE VendorArchive(
+	Vendor_ID INTEGER,
+	ISBN VARCHAR(13),
+	Sells VARCHAR(1),
+	PRIMARY KEY(Vendor_ID, ISBN),
+	FOREIGN KEY (Vendor_ID) REFERENCES Vendor(Vendor_ID),
+	FOREIGN KEY (ISBN) REFERENCES Textbook(ISBN)
+);
+
 CREATE TABLE Professor (
 	Professor_ID INTEGER AUTO_INCREMENT PRIMARY KEY,
 	Professor_Name VARCHAR(45),
