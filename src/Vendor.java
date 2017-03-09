@@ -75,7 +75,7 @@ public class Vendor {
     /**
      * Adds a new Textbook tuple and a new VendorArchive tuple that shows that this vendor owns the new textbook
      * If textbook already exists, this method calls the addExistingTextbook method
-     * @param ISBN {@code String} of te
+     * @param ISBN {@code String} of textbook
      * @param Title {@code String} of textbook 
      * @param Subject {@code String} of textbook 
      * @param Author {@code String} of textbook 
