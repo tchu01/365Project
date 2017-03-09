@@ -12,6 +12,7 @@ public class Vendor {
     private String Street;
     private String State;
     private String Zip_Code;
+    //TODO Consider adding a lastTextbook variable where I store values in a textbook object for my addNewTextbook's first if
 
     /**
      * Constructor for an existing vendor in the Vendor table
@@ -57,7 +58,7 @@ public class Vendor {
         this.Zip_Code = Zip_Code;
 
         try {
-            int ret;
+            int ret
             Statement statement = connect.createStatement();
             String q1 = "INSERT INTO Vendor (Vendor_ID, Vendor_Name, Phone_Number, Street, City, State, Zip_Code) ";
             q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\",
@@ -74,7 +75,7 @@ public class Vendor {
     /**
      * Adds a new Textbook tuple and a new VendorArchive tuple that shows that this vendor owns the new textbook
      * If textbook already exists, this method calls the addExistingTextbook method
-     * @param ISBN {@code String} of textbook 
+     * @param ISBN {@code String} of te
      * @param Title {@code String} of textbook 
      * @param Subject {@code String} of textbook 
      * @param Author {@code String} of textbook 
