@@ -132,7 +132,6 @@ public class Vendor {
      * Checks to see if a particular textbook exists in the database
      * @param ISBN {@code String} of textbook 
      * @return true if textbook exists, false if textbook doesn't exist
-     *
     */
     public boolean textbookExists(String ISBN) {
         try {
