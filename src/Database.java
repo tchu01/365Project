@@ -7,34 +7,58 @@ class Database {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // String jdbc = "jdbc:mysql://cslvm74.csc.calpoly.edu:3306/tchu01?user=tchu01&password=abc123";
-            String jdbc = "jdbc:mysql://localhost:3306/365Project?user=root&password=123";
+            String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
-            if (Professor.IDExists(connect, 21)) {
-                Professor p1 = new Professor(connect, 21);
-                System.out.println(p1.get_ID() + ", " + p1.getProfessor_Name() + ", " + p1.getEmail() + ", " + p1.getDepartment());
+            // Professor
+            int testID = 21;
+            String testProfessorName = "Timothy Chu";
+            String testEmail = "tchu01@calpoly.edu";
+            String testProfessorDepartment = "CSC";
+            // Course
+            String testCourseDepartment = "CPE";
+            int testCourseNumber = 101;
 
-                boolean exists = p1.courseExists("CSC", 102);
-                if (exists) {
-                    System.out.println("Course exists: ");
-                }
-                else {
-                    p1.addCourse("CSC", 102);
-                }
+            // Textbook
+            String testISBN = "20";
+            String testTitle = "Intro to Java";
+            String testSubject = "CPE";
+            String testAuthor = "Nathan Yee";
+            int testEdition = 1;
 
-                exists = p1.textbookExists("20");
+            if (Professor.IDExists(connect, testID)) {
+                Professor p1 = new Professor(connect, testID);
+                System.out.println("Professor exists");
+
+                boolean exists = p1.courseExists(testCourseDepartment, testCourseNumber);
                 if (exists) {
-                    System.out.println("Textbook exists: ");
+                    System.out.println("Course exists");
+
+                    exists = p1.textbookExists(testISBN);
+                    if (exists) {
+                        System.out.println("Textbook exists");
+                    } else {
+                        p1.addTextbook(testCourseDepartment, testCourseNumber, testISBN, testTitle, testSubject, testAuthor, testEdition);
+                        System.out.println("Creating " + testTitle + " (ISBN + " + testISBN+ ") Textbook");
+                    }
+
+                    exists = p1.requiredBookExists(testCourseDepartment, testCourseNumber, testISBN);
+                    if (exists) {
+                        System.out.println("RequiredBook exists");
+                    } else {
+                        p1.addRequiredBook(testCourseDepartment, testCourseNumber, testISBN);
+                        System.out.println("Creating RequiredBook");
+                    }
                 } else {
-                    p1.addTextbook("20", "Intro to Java", "Java", "Some Author", 1, 25);
+                    p1.addCourse(testCourseDepartment, testCourseNumber);
+                    System.out.println("Creating " + testCourseDepartment + " " + testCourseNumber + " Course");
                 }
 
+            } else {
+                Professor p2 = new Professor(connect, testProfessorName, testEmail, testProfessorDepartment);
+                System.out.println("Creating Professor: " + p2.get_ID() + ", " + p2.getProfessor_Name() + ", " + p2.getEmail() + ", " + p2.getDepartment());
             }
-
-            // Professor p2 = new Professor(connect, "Adam Smith", "asmith@calpoly.edu", "CSC");
-            // System.out.println(p2.get_ID() + ", " + p2.getProfessor_Name() + ", " + p2.getEmail() + ", " + p2.getDepartment());
-
 
             // ResultSet rs;
             // Statement statement = connect.createStatement();

@@ -88,7 +88,7 @@ public class Professor {
         return false;
     }
 
-    public void addTextbook(String ISBN, String Title, String Subject, String Author, int Edition) {
+    public void addTextbook(String Department, int Course_Number, String ISBN, String Title, String Subject, String Author, int Edition) {
         try {
             int ret;
             Statement statement = connect.createStatement();
@@ -101,7 +101,6 @@ public class Professor {
         } catch (SQLException e) {
             Database.printSQLException(e);
         }
-
     }
 
     public boolean textbookExists(String ISBN) {
@@ -125,11 +124,39 @@ public class Professor {
         return false;
     }
 
-    public void addRequiredBook() {
+    public void addRequiredBook(String Department, int Course_Number, String ISBN) {
+        try {
+            int ret;
+            Statement statement = connect.createStatement();
+            String q1 = "INSERT INTO RequiredBook (Department, Course_Number, Professor_ID, Textbook_Required) ";
+            q1 += "VALUES (\"" + Department + "\", " + Course_Number + ", " + Professor_ID + ", \"" + ISBN + "\");";
+            ret = statement.executeUpdate(q1);
 
+            statement.close();
+            this.connect.commit();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
     }
 
-    public boolean requiredBookExists() {
+    public boolean requiredBookExists(String Department, int Course_Number, String ISBN) {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT * FROM RequiredBook R WHERE R.Department = \"" + Department + "\" AND R.Course_Number = " + Course_Number + " AND R.Professor_ID = " + Professor_ID + " AND R.Textbook_Required = \"" + ISBN + "\";";
+            rs = statement.executeQuery(q1);
+            if (rs.next()) {
+                statement.close();
+                rs.close();
+                return true;
+            }
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
         return false;
     }
 

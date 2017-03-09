@@ -58,11 +58,10 @@ public class Vendor {
         this.Zip_Code = Zip_Code;
 
         try {
-            int ret
+            int ret;
             Statement statement = connect.createStatement();
             String q1 = "INSERT INTO Vendor (Vendor_ID, Vendor_Name, Phone_Number, Street, City, State, Zip_Code) ";
-            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\",
-                \"" + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
+            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\", " + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
             ret = statement.executeUpdate(q1);
 
             statement.close();
@@ -84,7 +83,7 @@ public class Vendor {
     */
     //TODO: Consider checking to see if the Title, Subject, Author, and Edition match to make sure that they got the right ISBN
     public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, int Price) {
-        if(textbookExists(ISBN) {
+        if(textbookExists(ISBN)) {
             addExistingTextbook(ISBN, Price);
         }
         else {
@@ -116,6 +115,8 @@ public class Vendor {
     public void addExistingTextbook(String ISBN, int Price) {
         try {
             int ret;
+            Statement statement = connect.createStatement();
+
             String q1 = "INSERT INTO VendorArchive (Vendor_ID, ISBN, Price) ";
             q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + ISBN + "\", " + Price + ");";
             ret = statement.executeUpdate(q1);
@@ -212,7 +213,7 @@ public class Vendor {
      * Gives us this vendor's ID
      * @return Vendor_ID
     */
-    public String getID() {
+    public int getID() {
         return this.Vendor_ID;
     }
 
