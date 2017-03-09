@@ -81,6 +81,7 @@ public class Vendor {
      * @param Edition {@code int} of textbook 
      * @param Price {@code int} of textbook for this vendor
     */
+    //TODO: Consider checking to see if the Title, Subject, Author, and Edition match to make sure that they got the right ISBN
     public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, int Price) {
         if(textbookExists(ISBN) {
             addExistingTextbook(ISBN, Price);
