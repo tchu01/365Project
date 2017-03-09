@@ -4,12 +4,12 @@ import java.sql.*;
 public class Student {
 	static Connection con; 			//Connection that persists through entire transaction.	
 	public int studentID;
-	ResultSet rs;
-	Statement statement;
+	private ResultSet rs;
+	private Statement statement;
 	
-
-  //CONSTRUCTOR
-  public Student(int studentID, Connection con){
+	// define query
+	
+	public Student(int studentID, Connection con){
 		this.studentID = studentID;
 		Student.con = con;
 	
@@ -22,8 +22,7 @@ public class Student {
 	
 	//SEES if Customer/Student exists in Record, based on their Customer ID.
 	public boolean findStudent(int studentID){
-		String search = "SELECT * FROM Customer WHERE Customer_ID = ";
-		search = search.concat(Integer.toString(studentID));
+		String search = "SELECT * FROM Customer WHERE Customer_ID = " + Integer.toString(studentID);
 		search = search.concat(";");
 		boolean studentExists = true;
 	
@@ -57,6 +56,7 @@ public class Student {
 			String getID = "SELECT Customer_ID FROM Customer ORDER BY Customer_ID DESC LIMIT 1;";
 			rs = statement.executeQuery(getID);
 			newCustID = rs.getInt("Customer_ID");   
+			this.studentID = newCustID;
 			
             statement.close();
             rs.close();
@@ -69,9 +69,9 @@ public class Student {
 	}
 	
 	//prints out all the courses 
-	public void getCourses(){
+	public void getCourses(String department, int Course_Number){
 		//Should we display Professor_ID since that should be a personal/private identifier?
-		String query = "SELECT c.Department, c.Course_Number, c.Professor_ID, p.Professor_Name FROM Course c, Professor p WHERE c.Professor_ID = p.Professor_ID";
+		String query = "SELECT c.Department, c.Course_Number, c.Professor_ID, p.Professor_Name FROM Course c, Professor p WHERE c.Professor_ID = p.Professor_ID AND c.Course_Number = " + Integer.toString(Course_Number) + " AND WHERE c.Department = '" + department + "';" ;
 
 		try {	
 			rs = statement.executeQuery(query);
@@ -89,12 +89,12 @@ public class Student {
 	
 	//student select class and professor id to query books
 	public void getRequiredBooks(String dept, int course, int profID){
-		String query = "SELECT r.Department, r.Course_Number, r.Professor_ID, t.Title, t.Price FROM RequiredBook r, Textbook t WHERE r.Textbook_Required = t.ISBN AND r.Department = '" + dept + "' AND r.Course_Number = " + Integer.toString(course) + " AND r.Professor_ID = " + Integer.toString(profID) + ";";
+		String query = "SELECT r.Department, r.Course_Number, r.Professor_ID, t.Title, t.ISBN, t.Price FROM RequiredBook r, Textbook t WHERE r.Textbook_Required = t.ISBN AND r.Department = '" + dept + "' AND r.Course_Number = " + Integer.toString(course) + " AND r.Professor_ID = " + Integer.toString(profID) + ";";
 		
 		try {
 			rs = statement.executeQuery(query);
 			while (rs.next())
-				System.out.println(rs.getString("Department") + " " + rs.getInt("Course_Number") + " || Professor ID: " + rs.getInt("Professor_ID") + " || Text Required: "  + rs.getString("Title") + " Price: " + rs.getDouble("Price"));
+				System.out.println(rs.getString("Department") + " " + rs.getInt("Course_Number") + " || Professor ID: " + rs.getInt("Professor_ID") + " || Text Required: "  + rs.getString("Title") + " ISBN: " + rs.getString("ISBN") + " Price: " + rs.getDouble("Price"));
 		
             statement.close();
             rs.close();
@@ -106,12 +106,12 @@ public class Student {
 	}
 	
 	public void getVendor(int ISBN){
-		String query = "SELECT v.Vendor_ID, v.Vendor_Name, t.ISBN, t.Title FROM VendorArchive v, Vendor ven, Textbook t WHERE v.Vendor_ID = ven.Vendor_ID AND v.ISBN = T.ISBN AND v.Sells = 1 AND v.ISBN =  " + Integer.toString(ISBN) + ";";
+		String query = "SELECT v.Vendor_ID, v.Vendor_Name, t.ISBN, t.Title, t.Price FROM VendorArchive v, Vendor ven, Textbook t WHERE v.Vendor_ID = ven.Vendor_ID AND v.ISBN = T.ISBN AND v.ISBN =  " + Integer.toString(ISBN) + ";";
 	
 		try {
 			rs = statement.executeQuery(query);
 			while(rs.next())
-				System.out.println("Vendor: " + rs.getInt("Vendor_ID") + "-" + rs.getString("Vendor_Name") + " || Text: " + rs.getString("ISBN") + " " +  rs.getString("Title"));
+				System.out.println("Vendor: " + rs.getInt("Vendor_ID") + "-" + rs.getString("Vendor_Name") + " || Text: " + rs.getString("ISBN") + " " +  rs.getString("Title") + " PRICE: " + rs.getDouble("Price"));
 			
 			statement.close();
             rs.close();
