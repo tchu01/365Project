@@ -2,7 +2,7 @@ import java.util.*;
 import java.sql.*;
 
 public class Student {
-	static Connection con; 			//Connection that persists through entire transaction.	
+	static Connection con; 			//Connection that persists through entire transaction!!
 	public int studentID;
 	private ResultSet rs;
 	private Statement statement;
