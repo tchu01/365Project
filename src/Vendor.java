@@ -158,7 +158,6 @@ public class Vendor {
      * @param connect {@code Connection}
      * @param id {@code int} that we are checking
      * @return true if ID exists, false if ID doesn't exist
-     *
     */
     public static boolean IDExists(Connection connect, int id) {
         boolean exists = false;
