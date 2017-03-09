@@ -208,4 +208,52 @@ public class Vendor {
         return count + 1;
     }
 
+    /**
+     * Gives us this vendor's ID
+     * @return Vendor_ID
+    */
+    public String getID() {
+        return this.Vendor_ID;
+    }
+
+    /**
+     * Gives us this Vendor_Name
+     * @return Vendor_Name
+    */
+    public String getName() {
+        return this.Vendor_Name;
+    }
+
+    /**
+     * Gives us this vendor's phone number
+     * @return Phone_Number
+    */
+    public String getPhoneNumber() {
+        return this.Phone_Number;
+    }
+
+    /**
+     * Gives us this vendor's street
+     * @return Vendor_ID
+    */
+    public String getStreet() {
+        return this.Street;
+    }
+
+    /**
+     * Gives us this vendor's state
+     * @return State
+    */
+    public String getState() {
+        return this.State;
+    }
+
+    /**
+     * Gives us this vendor's zip code
+     * @return Zip_Code
+    */
+    public String getZipCode() {
+        return this.Zip_Code;
+    }
+
 }
