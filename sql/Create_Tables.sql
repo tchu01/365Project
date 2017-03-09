@@ -34,12 +34,12 @@ CREATE TABLE Textbook (
 	Subject VARCHAR(45),
 	Author VARCHAR(45),
 	Edition INTEGER,
-	Price REAL
 );
 
 CREATE TABLE VendorArchive(
 	Vendor_ID INTEGER,
 	ISBN VARCHAR(13),
+	Price REAL
 	PRIMARY KEY(Vendor_ID, ISBN),
 	FOREIGN KEY (Vendor_ID) REFERENCES Vendor(Vendor_ID),
 	FOREIGN KEY (ISBN) REFERENCES Textbook(ISBN)
@@ -76,7 +76,7 @@ CREATE TABLE RequiredBook (
 	Course_Number INTEGER,
 	Professor_ID INTEGER,
 	Textbook_Required VARCHAR(13),
-	PRIMARY KEY (Department, Course_Number, Professor_ID),
+	PRIMARY KEY (Department, Course_Number, Professor_ID, Textbook_Required),
 	FOREIGN KEY (Department, Course_Number, Professor_ID) REFERENCES Course(Department, Course_Number, Professor_ID),
 	FOREIGN KEY (Textbook_Required) REFERENCES Textbook(ISBN)
 );
