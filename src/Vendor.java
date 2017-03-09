@@ -73,6 +73,7 @@ public class Vendor {
 
     /**
      * Adds a new Textbook tuple and a new VendorArchive tuple that shows that this vendor owns the new textbook
+     * If textbook already exists, this method calls the addExistingTextbook method
      * @param ISBN {@code String} of textbook 
      * @param Title {@code String} of textbook 
      * @param Subject {@code String} of textbook 
@@ -81,21 +82,26 @@ public class Vendor {
      * @param Price {@code int} of textbook for this vendor
     */
     public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, int Price) {
-        try {
-            int ret;
-            Statement statement = connect.createStatement();
-            String q1 = "INSERT INTO Textbook (ISBN, Title, Subject, Author, Edition) ";
-            q1 += "VALUES (\"" + ISBN + "\", \"" + Title + "\", \"" + Subject + "\", \"" + Author + "\", " + Edition + ");";
-            ret = statement.executeUpdate(q1);
+        if(textbookExists(ISBN) {
+            addExistingTextbook(ISBN, Price);
+        }
+        else {
+            try {
+                int ret;
+                Statement statement = connect.createStatement();
+                String q1 = "INSERT INTO Textbook (ISBN, Title, Subject, Author, Edition) ";
+                q1 += "VALUES (\"" + ISBN + "\", \"" + Title + "\", \"" + Subject + "\", \"" + Author + "\", " + Edition + ");";
+                ret = statement.executeUpdate(q1);
 
-            String q2 = "INSERT INTO VendorArchive (Vendor_ID, ISBN, Price) ";
-            q2 += "VALUES (\"" + this.Vendor_ID + "\", \"" + ISBN + "\", " + Price + ");";
-            ret = statement.executeUpdate(q2);
+                String q2 = "INSERT INTO VendorArchive (Vendor_ID, ISBN, Price) ";
+                q2 += "VALUES (\"" + this.Vendor_ID + "\", \"" + ISBN + "\", " + Price + ");";
+                ret = statement.executeUpdate(q2);
 
-            statement.close();
-            this.connect.commit();
-        } catch (SQLException e) {
-            Database.printSQLException(e);
+                statement.close();
+                this.connect.commit();
+            } catch (SQLException e) {
+                Database.printSQLException(e);
+            }
         }
 
     }
