@@ -15,7 +15,7 @@ public class Professor {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
-            rs = statement.executeQuery("SELECT * FROM Professor P WHERE P.Professor_ID = " + professor_ID);
+            rs = statement.executeQuery("SELECT * FROM Professor P WHERE P.Professor_ID = " + professor_ID + ";");
             rs.next();
             this.Professor_ID = rs.getInt("Professor_ID");
             this.Professor_Name = rs.getString("Professor_Name");
@@ -32,6 +32,7 @@ public class Professor {
     public Professor(Connection connect, String Professor_Name, String Email, String Department) {
         this.connect = connect;
         this.Professor_ID = nextID(connect);
+        // putting the tuple in the database
         this.Professor_Name = Professor_Name;
         this.Email = Email;
         this.Department = Department;
@@ -42,7 +43,7 @@ public class Professor {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
-            rs = statement.executeQuery("SELECT * FROM Professor P WHERE P.Professor_ID = " + id);
+            rs = statement.executeQuery("SELECT * FROM Professor P WHERE P.Professor_ID = " + id + ";");
             if (rs.next()) {
                 exists = true;
             }
@@ -64,7 +65,7 @@ public class Professor {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
-            rs = statement.executeQuery("SELECT COUNT(*) FROM Professor");
+            rs = statement.executeQuery("SELECT COUNT(*) FROM Professor;");
             if (rs.next()) {
                 count = rs.getInt(1);
             }

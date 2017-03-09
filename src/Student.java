@@ -7,7 +7,7 @@ public class Student {
 	ResultSet rs;
 	Statement statement;
 	
-	
+
   //CONSTRUCTOR
   public Student(int studentID, Connection con){
 		this.studentID = studentID;
