@@ -227,7 +227,7 @@ public class Vendor {
     /**
      * Gives us this vendor's phone number
      * @return Phone_Number
-    */
+    */ 
     public String getPhoneNumber() {
         return this.Phone_Number;
     }
