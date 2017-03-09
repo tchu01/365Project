@@ -53,9 +53,10 @@ public class Main{
 				else
 					make new vendor
 
-				add textbook to table
+				add new textbook to table
 					check new isbn
-
+					
+				add existing textbook to vendorArchive table
 
 		*/
 	}
