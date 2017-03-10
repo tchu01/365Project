@@ -25,6 +25,7 @@ public class Vendor {
             Statement statement = connect.createStatement();
             rs = statement.executeQuery("SELECT * FROM Vendor V WHERE V.Vendor_ID = " + Vendor_ID);
             rs.next();
+            this.connect = connect;
             this.Vendor_ID = rs.getInt("Vendor_ID");
             this.Vendor_Name = rs.getString("Vendor_Name");
             this.Phone_Number = rs.getString("Phone_Number");
@@ -61,7 +62,7 @@ public class Vendor {
             int ret;
             Statement statement = connect.createStatement();
             String q1 = "INSERT INTO Vendor (Vendor_ID, Vendor_Name, Phone_Number, Street, City, State, Zip_Code) ";
-            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\", " + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
+            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\", \"" + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
             ret = statement.executeUpdate(q1);
 
             statement.close();
