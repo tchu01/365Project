@@ -3,16 +3,16 @@ import java.sql.*;
 
 public class Student {
 	private Connection con; 			//Connection that persists through entire transaction.	
-	ResultSet rs;
-	private Statement statement;	
-
+	static ResultSet rs;
+	private static Statement statement;
+	private String student_name;
 
 	public Student(Connection connect, int student_ID){
         try {
         	this.con = connect;
             this.statement = connect.createStatement();
 
-           this.findStudent(student_ID);
+           findStudent(connect,student_ID);
         } 
 
         catch (SQLException e) {
@@ -31,21 +31,26 @@ public class Student {
                 System.exit(-1);
             }
 
+			student_name = customer_name;
             statement.close();
             this.con.commit();
         } catch (SQLException e) {
             Database.printSQLException(e);
         }
     }
-	
+
+    public String getStudentName(){
+		return this.student_name;
+	}
 	//SEES if Customer/Student exists in Record, based on their Customer ID.
-	public boolean findStudent(int studentID){
+	public static boolean findStudent(Connection con, int studentID){
 		String search = "SELECT * FROM Customer WHERE Customer_ID = ";
 		search = search.concat(Integer.toString(studentID));
 		search = search.concat(";");
 		boolean studentExists = true;
 	
 		try{
+			statement = con.createStatement();
 			rs = statement.executeQuery(search);
 			if (!rs.next())					//if no record is returned, is false.
 				studentExists = false;
@@ -69,13 +74,17 @@ public class Student {
 		String search = "INSERT INTO Customer(Customer_Name, Phone_Number, Street, City, State, Zip_Code) VALUES(";
 		String query ="'" + name +  "', '" + phone + "', '" + street + "', '" + city + "', '" + state + "', '" + zip + "');";
 		search = search.concat(query);
-		
+		//System.out.println("INSERT CUST QUERY: " + search);
+
 		try {
 			statement.executeUpdate(search);
+			System.out.println("INSERT CUST QUERY: " + search);
+
 			String getID = "SELECT Customer_ID FROM Customer ORDER BY Customer_ID DESC LIMIT 1;";
 			rs = statement.executeQuery(getID);
-			newCustID = rs.getInt("Customer_ID");   
-			
+			rs.next();
+			newCustID = rs.getInt("Customer_ID");
+			System.out.println("NEW CUST ID: " + newCustID);
 			this.con.commit();
             statement.close();
             rs.close();
