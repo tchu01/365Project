@@ -5,12 +5,13 @@ class Database {
     static Connection connect;
     static Scanner scan = new Scanner(System.in);
     static Professor prof;
+    static Student stud;
 
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            // String jdbc = "jdbc:mysql://cslvm74.csc.calpoly.edu:3306/tchu01?user=tchu01&password=abc123";
-            String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
+            String jdbc = "jdbc:mysql://cslvm74.csc.calpoly.edu:3306/aquach04?user=aquach04&password=12345678";
+            // String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
@@ -121,6 +122,7 @@ class Database {
                 professor();
                 break;
             case "S":
+                student();
                 break;
             case "V":
                 break;
@@ -187,4 +189,54 @@ class Database {
             }
         } while (cont);
     }
-}
+
+
+    public static void student(){
+        boolean cont = true;
+        do {
+            System.out.println("Enter your Student ID to continue, or type NONE to create a new account:");
+            System.out.print(">>>");
+            String id = scan.next();
+            if (id.equals("NONE")) {
+                cont = false;
+                System.out.println("Enter your name: ");
+                String name = scan.next();
+                System.out.println("Enter your phone number: ");
+                String phone = scan.next();
+                System.out.println("Enter your street address: ");
+                String street = scan.next();
+                System.out.println("Enter your city: ");
+                String city = scan.next();
+                System.out.println("Enter your state: ");
+                String state = scan.next();
+                System.out.println("Enter your zip code: ");
+                String zip = scan.next();
+                stud = new Student(connect, name, phone, street, city, state, zip);
+            } else {
+                try {
+                    int Sid= Integer.parseInt(id);
+                    if (Student.findStudent(connect, Sid)) {
+                        cont = false;
+                        stud = new Student(connect, Sid);
+                        String yn = "";
+                        do {
+                            System.out.println("Continue as " + stud.getStudentName() + "? (Y/N)");
+                            System.out.println(">>>");
+                            yn = scan.next();
+                            if(yn.equals("N")) {
+                                cont = true;
+                            }
+                        } while (!yn.equals("Y") && !yn.equals("N"));
+
+                    } else {
+                        System.out.println("No match for your ID in the database.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter an integer for your ID");
+                }
+            }
+        } while (cont);
+    }
+
+
+    }
