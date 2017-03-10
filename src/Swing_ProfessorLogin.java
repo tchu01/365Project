@@ -8,12 +8,12 @@
  *
  * @author timothy
  */
-public class ProfessorLogin extends javax.swing.JPanel {
+public class Swing_ProfessorLogin extends javax.swing.JPanel {
 
     /**
      * Creates new form Professor
      */
-    public ProfessorLogin() {
+    public Swing_ProfessorLogin() {
         initComponents();
     }
 

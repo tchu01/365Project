@@ -1,5 +1,5 @@
 import javax.swing.*;
-public class FrontPage {
+public class Swing_FrontPage {
     public static void main(String[] args) {
         JFrame frame=new JFrame();//creating instance of JFrame
 

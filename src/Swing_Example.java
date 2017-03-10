@@ -8,16 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Swing {
+public class Swing_Example {
     JFrame frame = new JFrame("CardLayout demo");
     JPanel panelCont = new JPanel();
     JPanel panelSecond = new JPanel();
-    JPanel professorLogin = new ProfessorLogin();
+    JPanel professorLogin = new Swing_ProfessorLogin();
     JButton buttonOne = new JButton("Switch to second panel/workspace");
     JButton buttonSecond = new JButton("Switch to first panel/workspace");
     CardLayout cl = new CardLayout();
 
-    public Swing() {
+    public Swing_Example() {
         panelCont.setLayout(cl);
 
         professorLogin.add(buttonOne);
@@ -54,7 +54,7 @@ public class Swing {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Swing();
+                new Swing_Example();
             }
         });
     }
