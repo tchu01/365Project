@@ -4,9 +4,7 @@ import java.sql.*;
 public class Student {
 	private Connection con; 			//Connection that persists through entire transaction.	
 	ResultSet rs;
-	private Statement statement;
-	
-	private int customer_ID;
+	private Statement statement;	
 
 
 	public Student(Connection connect, int student_ID){
@@ -24,17 +22,17 @@ public class Student {
 
     public Student(Connection connect, String customer_name, String phone, String street, String city, String state, String zip) {
         try {
-            this.connect = connect;
+            this.con = connect;
             this.statement = connect.createStatement();
 
-            int success = this.makeNewStudent(name, phone, street, city, state, zip);
-            if (ret == -1) {
-                System.err.println("Student constructor did not insert into database; returned: " + ret);
+            int success = this.makeNewStudent(customer_name, phone, street, city, state, zip);
+            if (success == -1) {
+                System.err.println("Student constructor did not insert into database; returned: " + success);
                 System.exit(-1);
             }
 
             statement.close();
-            this.connect.commit();
+            this.con.commit();
         } catch (SQLException e) {
             Database.printSQLException(e);
         }
@@ -78,7 +76,7 @@ public class Student {
 			rs = statement.executeQuery(getID);
 			newCustID = rs.getInt("Customer_ID");   
 			
-			this.connect.commit();
+			this.con.commit();
             statement.close();
             rs.close();
 		}
@@ -127,7 +125,7 @@ public class Student {
 	}
 	
 	public void getVendor(int ISBN){
-		String query = "SELECT v.Vendor_ID, v.Vendor_Name, t.ISBN, t.Title FROM VendorArchive v, Vendor ven, Textbook t WHERE v.Vendor_ID = ven.Vendor_ID AND v.ISBN = T.ISBN AND v.Sells = 1 AND v.ISBN =  " + Integer.toString(ISBN) + ";";
+		String query = "SELECT v.Vendor_ID, v.Vendor_Name, t.ISBN, t.Title, v.Price FROM VendorArchive v, Vendor ven, Textbook t WHERE v.Vendor_ID = ven.Vendor_ID AND v.ISBN = T.ISBN AND v.ISBN =  " + Integer.toString(ISBN) + ";";
 	
 		try {
 			rs = statement.executeQuery(query);
@@ -145,7 +143,7 @@ public class Student {
 	
 	//HOW TO TEST FOR VALID INSERT? Should this return 1 for successful?
 	public int makeTransaction(int vendorID, int isbn, int custID){
-		String insertQuery = "INSERT INTO Transaction(Vendor_ID, Customer_ID, ISBN) VALUES(" + Integer.toString(vendorID) + ", '" + Integer.toString(isbn) + "', " + Integer.toBinaryString(custID) + ");"; 
+		String insertQuery = "INSERT INTO Transaction(Vendor_ID, Customer_ID, ISBN) VALUES(" + Integer.toString(vendorID) + ", '" + Integer.toString(isbn) + "', " + Integer.toString(custID) + ");"; 
 		int result = -1; 		//default failed operation
 		
 		try {
