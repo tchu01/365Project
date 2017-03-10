@@ -11,8 +11,8 @@ import javax.swing.SwingUtilities;
 public class Swing {
     JFrame frame = new JFrame("CardLayout demo");
     JPanel panelCont = new JPanel();
-    JPanel panelFirst = new JPanel();
     JPanel panelSecond = new JPanel();
+    JPanel professorLogin = new ProfessorLogin();
     JButton buttonOne = new JButton("Switch to second panel/workspace");
     JButton buttonSecond = new JButton("Switch to first panel/workspace");
     CardLayout cl = new CardLayout();
@@ -20,14 +20,14 @@ public class Swing {
     public Swing() {
         panelCont.setLayout(cl);
 
-        panelFirst.add(buttonOne);
+        professorLogin.add(buttonOne);
         panelSecond.add(buttonSecond);
-        panelFirst.setBackground(Color.BLUE);
+        professorLogin.setBackground(Color.BLUE);
         panelSecond.setBackground(Color.GREEN);
 
-        panelCont.add(panelFirst, "1");
+        panelCont.add(professorLogin, "1");
         panelCont.add(panelSecond, "2");
-        cl.show(panelCont, "1");
+        cl.show(panelCont, "2");
 
         buttonOne.addActionListener(new ActionListener() {
             @Override
