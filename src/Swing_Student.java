@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.lang.*;
 
-public class Swing {
+public class Swing_Student {
     Connection con;
     Student stud;
     Professor prof;
@@ -19,7 +19,7 @@ public class Swing {
     JPanel createNewStudent  = new JPanel(new GridLayout(0,1));
 
 
-    public Swing(){
+    public Swing_Student(){
 
         frame.getContentPane().setBackground(Color.yellow);
         this.panelCont.setLayout(null);
