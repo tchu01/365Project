@@ -213,7 +213,7 @@ public class Swing_Student {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new Swing();
+                    new Swing_Student();
                 }
             });
 
