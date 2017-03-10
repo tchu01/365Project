@@ -1,7 +1,10 @@
 import java.sql.*;
+import java.util.Scanner;
 
 class Database {
     static Connection connect;
+    static Scanner scan = new Scanner(System.in);
+    static Professor prof;
 
     public static void main(String[] args) {
         try {
@@ -11,6 +14,9 @@ class Database {
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
+            run();
+
+            /*
             // Professor
             int testID = 21;
             String testProfessorName = "Timothy Chu";
@@ -31,6 +37,10 @@ class Database {
                 Professor p1 = new Professor(connect, testID);
                 System.out.println("Professor exists");
 
+                System.out.println("list courses:");
+                p1.listCourses();
+                System.out.println();
+
                 boolean exists = p1.courseExists(testCourseDepartment, testCourseNumber);
                 if (exists) {
                     System.out.println("Course exists");
@@ -40,7 +50,7 @@ class Database {
                         System.out.println("Textbook exists");
                     } else {
                         p1.addTextbook(testCourseDepartment, testCourseNumber, testISBN, testTitle, testSubject, testAuthor, testEdition);
-                        System.out.println("Creating " + testTitle + " (ISBN + " + testISBN+ ") Textbook");
+                        System.out.println("Creating " + testTitle + " (ISBN + " + testISBN + ") Textbook");
                     }
 
                     exists = p1.requiredBookExists(testCourseDepartment, testCourseNumber, testISBN);
@@ -60,6 +70,7 @@ class Database {
                 System.out.println("Creating Professor: " + p2.get_ID() + ", " + p2.getProfessor_Name() + ", " + p2.getEmail() + ", " + p2.getDepartment());
             }
 
+
             // ResultSet rs;
             // Statement statement = connect.createStatement();
             // rs = statement.executeQuery("SELECT * FROM Customer");
@@ -69,6 +80,7 @@ class Database {
             // }
             // statement.close();
             // rs.close();
+            */
 
             connect.close();
         } catch (ClassNotFoundException e) {
@@ -92,5 +104,87 @@ class Database {
             e = e.getNextException();
         }
         System.exit(-1);
+    }
+
+    public static void run() {
+        System.out.println("Welcome to the Bookstore.");
+
+        String choice = "";
+        do {
+            System.out.println("Press P to continue as a Professor, S to continue as a Student, and V to continue as a Vendor.");
+            System.out.print(">>>");
+            choice = scan.next();
+        } while(!choice.equals("P") && !choice.equals("S") && !choice.equals("V"));
+
+        switch(choice) {
+            case "P":
+                professor();
+                break;
+            case "S":
+                break;
+            case "V":
+                break;
+            default:
+
+
+        }
+
+        boolean cont = true;
+
+
+        while (cont) {
+            String input = scan.next();
+            if (input.equals("QUIT")) {
+                cont = false;
+            }
+        }
+    }
+
+    public static void professor() {
+        professorLogin();
+    }
+
+    public static void professorLogin() {
+        boolean cont = true;
+        do {
+            System.out.println("Enter your professor ID to continue, or type NONE to create a new account:");
+            System.out.print(">>>");
+            String id = scan.next();
+            if (id.equals("NONE")) {
+                cont = false;
+                System.out.println("Enter your name:");
+                System.out.println(">>>");
+                String name = scan.next();
+                System.out.println("Enter your email:");
+                System.out.println(">>>");
+                String email = scan.next();
+                System.out.println("Enter your department:");
+                System.out.println(">>>");
+                String department = scan.next();
+                prof = new Professor(connect, name, email, department);
+            } else {
+                try {
+                    int id_ = Integer.parseInt(id);
+                    if (Professor.IDExists(connect, id_)) {
+                        cont = false;
+                        prof = new Professor(connect, id_);
+                        String yn = "";
+                        do {
+                            System.out.println("Continue as " + prof.getProfessor_Name() + " with email " + prof.getEmail() + "? (Y/N)");
+                            System.out.println(">>>");
+                            yn = scan.next();
+                            if(yn.equals("N")) {
+                                cont = true;
+                            }
+                        } while (!yn.equals("Y") && !yn.equals("N"));
+
+                    } else {
+                        System.out.println("No match for your ID in the database.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter an integer for your ID");
+                }
+            }
+        } while (cont);
     }
 }
