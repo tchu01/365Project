@@ -88,20 +88,22 @@ public class Professor {
         return false;
     }
 
-    public void listCourses() {
+    public ProfessorCoursesTableModel getProfessorCoursesTableModel() {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
             String q1 = "SELECT * FROM Course C WHERE C.Professor_ID = " + Professor_ID + ";";
             rs = statement.executeQuery(q1);
-            while (rs.next()) {
-                System.out.println(rs.getString("Department") + ", " + rs.getInt("Course_Number"));
-            }
-            statement.close();
-            rs.close();
+
+            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
         } catch (SQLException e) {
             Database.printSQLException(e);
         }
+
+        return null;
     }
 
     public void addTextbook(String Department, int Course_Number, String ISBN, String Title, String Subject, String Author, int Edition) {

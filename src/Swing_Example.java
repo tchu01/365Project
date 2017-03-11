@@ -16,11 +16,10 @@ public class Swing_Example {
     JPanel panelCont = new JPanel();
     CardLayout cl = new CardLayout();
 
-    JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, panelCont, cl);
-    JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, panelCont, cl);
+    JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
+    JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
 
     public Swing_Example() {
-        frame.setResizable(false);
         panelCont.setLayout(cl);
 
         panelCont.add(ProfessorCourses, "ProfessorCourses");
@@ -28,6 +27,7 @@ public class Swing_Example {
         cl.show(panelCont, "ProfessorCourses");
 
         frame.add(panelCont);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowListener() {
             @Override
@@ -65,7 +65,6 @@ public class Swing_Example {
         });
         frame.pack();
         frame.setVisible(true);
-
     }
 
     public static void main(String[] args) {
@@ -76,10 +75,10 @@ public class Swing_Example {
             connect.setAutoCommit(false);
 
             if(Professor.IDExists(connect, 21)) {
-                System.out.println("Found prof");
                 prof = new Professor(connect, 21);
             } else {
-                System.out.println("No prof");
+                System.err.println("No professor");
+                System.exit(-1);
             }
 
             SwingUtilities.invokeLater(new Runnable() {

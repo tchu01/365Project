@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,8 +16,9 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
     /**
      * Creates new form Swing_ProfessorNewCourse
      */
-    public Swing_ProfessorNewCourse(Professor prof, JPanel panelCont, CardLayout cl) {
+    public Swing_ProfessorNewCourse(Professor prof, JFrame frame, JPanel panelCont, CardLayout cl) {
         initComponents();
+
         jTextField1.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -33,7 +36,7 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.addKeyListener(new KeyListener() {
+        jTextField2.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -45,7 +48,7 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    transferFocus();
+                    jButton1.requestFocus();
                 }
             }
         });
@@ -53,13 +56,31 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                if(prof.courseExists("", 1)) {
+                String department = jTextField1.getText();
+                String course_num = jTextField2.getText();
 
+                if(department.length() == 3 && course_num.length() == 3) {
+                    try{
+                        int num = Integer.parseInt(course_num);
+                        if(prof.courseExists(department.toUpperCase(), num)) {
+                            System.out.println("Course already exists!");
+                        } else {
+                            prof.addCourse(department, num);
+                        }
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        //getComponent(0) refers to the first component inside of panelCont, which should be Swing_ProfessorCourses
+                        ((Swing_ProfessorCourses) panelCont.getComponent(0)).refreshTable();
+
+                        cl.show(panelCont, "ProfessorCourses");
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(frame, "Course numbers must be numbers!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Departments and course numbers are 3 characters long!");
                 }
-                cl.show(panelCont, "ProfessorCourses");
             }
         });
-
     }
 
     /**
@@ -77,6 +98,8 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
 
+        setPreferredSize(new java.awt.Dimension(600, 500));
+
         jLabel1.setText("Department:");
         jLabel1.setToolTipText("");
 
@@ -92,19 +115,19 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jButton1)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(74, 74, 74)
+                                                .addComponent(jTextField1))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGap(50, 50, 50)
                                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(212, Short.MAX_VALUE))
+                                .addGap(174, 174, 174))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
