@@ -88,14 +88,14 @@ public class Professor {
         return false;
     }
 
-    public ProfessorCoursesTableModel getProfessorCoursesTableModel() {
+    public SQLTableModel getProfessorCoursesTableModel() {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
             String q1 = "SELECT * FROM Course C WHERE C.Professor_ID = " + Professor_ID + ";";
             rs = statement.executeQuery(q1);
 
-            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+            SQLTableModel table = new SQLTableModel(rs);
             // statement.close();
             // rs.close();
             return table;
