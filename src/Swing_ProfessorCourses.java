@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  */
 public class Swing_ProfessorCourses extends javax.swing.JPanel {
     Professor prof;
-    ProfessorCoursesTableModel model;
+    SQLTableModel model;
 
     /**
      * Creates new form Swing_ProfessorCourses
