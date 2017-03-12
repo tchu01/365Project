@@ -72,6 +72,41 @@ public class Vendor {
         }
     }
 
+    public ProfessorCoursesTableModel getAllTextbooksTableModel() {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT T.ISBN, T.Title, T.Author, T.Edition FROM Textbook T, VendorArchive VA WHERE T.ISBN = VA.ISBN;";
+            rs = statement.executeQuery(q1);
+
+            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
+        return null;
+    }
+    public ProfessorCoursesTableModel getVendorTextbookTableModel() {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT T.ISBN, T.Title, T.Author, T.Edition, VA.Price FROM Textbook T, VendorArchive VA WHERE T.ISBN = VA.ISBN AND VA.Vendor_ID = " + Vendor_ID + ";";
+            rs = statement.executeQuery(q1);
+
+            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
+        return null;
+    }
+
     /**
      * Adds a new Textbook tuple and a new VendorArchive tuple that shows that this vendor owns the new textbook
      * If textbook already exists, this method calls the addExistingTextbook method
