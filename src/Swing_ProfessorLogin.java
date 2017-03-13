@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import java.sql.*;
 
 import java.awt.CardLayout;
@@ -16,15 +17,18 @@ import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+
 /**
- *
  * @author nyee
  */
 public class Swing_ProfessorLogin extends javax.swing.JPanel {
-  public static Professor prof;
+    public static Professor prof;
 
     JPanel ProfessorCourses;
-  JPanel ProfessorNewCourse;
+    JPanel ProfessorNewCourse;
+    JPanel ProfessorRequiredBooks;
+    JPanel ProfessorTextbooks;
+    JPanel ProfessorNewTextbook;
 
     /**
      * Creates new form Swing_ProfessorLogin
@@ -35,35 +39,42 @@ public class Swing_ProfessorLogin extends javax.swing.JPanel {
         CreateNewBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-			  cl.show(panelCont, "NewProfessor");
+                cl.show(panelCont, "NewProfessor");
             }
-		  });
+        });
 
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-			  System.out.println("Do something for login");
+                System.out.println("Do something for login");
 
-			  String profId = profIDInput.getText();
-			  System.out.println("Got ID " + profId);
-			  int idInt = Integer.parseInt(profId);
+                String profId = profIDInput.getText();
+                System.out.println("Got ID " + profId);
+                int idInt = Integer.parseInt(profId);
 
-			  if(Professor.IDExists(AppMain.connect, idInt)) {
-				prof = new Professor(AppMain.connect, idInt);
+                if (Professor.IDExists(AppMain.connect, idInt)) {
+                    prof = new Professor(AppMain.connect, idInt);
 
-				ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
-				ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
-				panelCont.add(ProfessorCourses, "ProfessorCourses");
-				panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
+                    ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
+                    ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
+                    ProfessorRequiredBooks = new Swing_ProfessorRequiredBooks(prof, frame, panelCont, cl);
+                    ProfessorTextbooks = new Swing_ProfessorTextbooks(prof, frame, panelCont, cl);
+                    ProfessorNewTextbook = new Swing_ProfessorNewTextbook(prof, frame, panelCont, cl);
+
+                    panelCont.add(ProfessorCourses, "ProfessorCourses");
+                    panelCont.add(ProfessorRequiredBooks, "ProfessorRequiredBooks");
+                    panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
+                    panelCont.add(ProfessorTextbooks, "ProfessorTextbooks");
+                    panelCont.add(ProfessorNewTextbook, "ProfessorNewTextbook");
 
 
-				cl.show(panelCont, "ProfessorCourses");
-			  } else {
-				invalidLbl.setText("Invalid professor");
-			  }
+                    cl.show(panelCont, "ProfessorCourses");
+                } else {
+                    invalidLbl.setText("Invalid professor");
+                }
 
             }
-		  });
+        });
 
     }
 
@@ -102,43 +113,43 @@ public class Swing_ProfessorLogin extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(CreateNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(invalidLbl)
-                            .addComponent(profIDInput, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(157, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(203, 203, 203)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(193, 193, 193)
+                                                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(161, 161, 161)
+                                                .addComponent(CreateNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(117, 117, 117)
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(invalidLbl)
+                                                        .addComponent(profIDInput, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(157, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(profIDInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(invalidLbl)
-                .addGap(49, 49, 49)
-                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CreateNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(profIDInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(invalidLbl)
+                                .addGap(49, 49, 49)
+                                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CreateNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(162, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

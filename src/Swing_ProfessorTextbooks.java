@@ -37,8 +37,8 @@ public class Swing_ProfessorTextbooks extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(frame, "No row selected!");
                 } else {
                     System.out.println("ISBN: " + jTable1.getValueAt(jTable1.getSelectedRow(), 0) + ", Title: " + jTable1.getValueAt(jTable1.getSelectedRow(), 1)+ ", Subject: " + jTable1.getValueAt(jTable1.getSelectedRow(), 2) + ", Author: " + jTable1.getValueAt(jTable1.getSelectedRow(), 3) + ", Edition: " + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
-                    String dept = ((Swing_ProfessorCourses) panelCont.getComponent(0)).Department;
-                    int cnum = ((Swing_ProfessorCourses) panelCont.getComponent(0)).Course_Number;
+                    String dept = ((Swing_ProfessorCourses) panelCont.getComponent(8)).Department;
+                    int cnum = ((Swing_ProfessorCourses) panelCont.getComponent(8)).Course_Number;
                     String ISBN = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
 
                     if (prof.requiredBookExists(dept, cnum, ISBN)) {
@@ -47,7 +47,7 @@ public class Swing_ProfessorTextbooks extends javax.swing.JPanel {
                         prof.addRequiredBook(dept, cnum , ISBN);
                     }
 
-                    ((Swing_ProfessorRequiredBooks) panelCont.getComponent(1)).refreshTable();
+                    ((Swing_ProfessorRequiredBooks) panelCont.getComponent(9)).refreshTable();
                     cl.show(panelCont, "ProfessorRequiredBooks");
                 }
             }

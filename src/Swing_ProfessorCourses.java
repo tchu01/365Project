@@ -55,6 +55,13 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
             }
         });
 
+        jButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                System.exit(0);
+            }
+        });
+
         jLabel2.setText("Hello " + prof.getProfessor_Name() + " (ID: " + prof.get_ID() + ")");
     }
 

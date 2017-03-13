@@ -88,7 +88,7 @@ public class AppMain {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://cslvm74.csc.calpoly.edu:3306/aquach04?user=aquach04&password=12345678";
+            String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
