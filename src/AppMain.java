@@ -11,6 +11,9 @@ import javax.swing.SwingUtilities;
 public class AppMain {
     public static Connection connect;
 
+  //FIX LATER
+  Student stud;
+  
   JFrame frame = new JFrame("CardLayout");
   JPanel panelCont = new JPanel();
   CardLayout cl = new CardLayout();
@@ -19,14 +22,24 @@ public class AppMain {
     // JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
   JPanel Home = new Swing_Home(frame, panelCont, cl);
   JPanel profLogin = new Swing_ProfessorLogin(frame, panelCont, cl);
+  JPanel studentLogin = new Swing_StudentLogin(frame, panelCont, cl);
   JPanel newProf = new Swing_NewProfessor(frame, panelCont, cl);
+  JPanel newStudent = new Swing_NewStudent(stud, frame, panelCont, cl);
+  JPanel existingStudent = new Swing_ExistingStudent(stud, frame, panelCont, cl);
+  JPanel enterCourses = new Swing_EnterCourse(stud, frame, panelCont, cl);
+  JPanel displayCourses = new Swing_DisplayCourses(stud, frame, panelCont, cl);
 
     public AppMain() {
         panelCont.setLayout(cl);
 
 
         panelCont.add(profLogin, "ProfessorLogin");
+        panelCont.add(studentLogin, "StudentLogin");
         panelCont.add(newProf, "NewProfessor");
+        panelCont.add(newStudent, "newStudent");
+        panelCont.add(existingStudent, "existingStudent");
+        panelCont.add(enterCourses, "EnterCourses");
+        panelCont.add(displayCourses, "DisplayCourses");
 
         panelCont.add(Home, "Home");
 
@@ -77,7 +90,7 @@ public class AppMain {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://localhost:3306/project?user=nyee&useSSL=true";
+            String jdbc = "jdbc:mysql://cslvm74.csc.calpoly.edu:3306/aquach04?user=aquach04&password=12345678";
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
