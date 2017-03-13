@@ -43,12 +43,12 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
                 if(jTable1.getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(frame, "No row selected!");
                 } else {
-                    String priceString = JOptionPane.showInputDialog("Enter Price", null);
                     try {
                         if(v.alreadyOffersTextbook((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0))) {
-                            JOptionPane.showMessageDialog(frame, "This textbook already exists");
+                            JOptionPane.showMessageDialog(frame, "You already offer this textbook");
                             return;
                         }
+                        String priceString = JOptionPane.showInputDialog("Enter Price", null);
                         double price = Double.parseDouble(priceString);
                         v.addExistingTextbook((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0), price);
                         ((Swing_VendorArchiveTextbooks) panelCont.getComponent(2)).refreshTable();
@@ -96,10 +96,10 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
-        jButton1.setText("Add New Textbook");
+        jButton1.setText("Offer New Textbook");
         jButton1.setToolTipText("");
 
-        jButton2.setText("Add Existing Textbook");
+        jButton2.setText("Offer Existing Textbook");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,7 +122,7 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setText("See My Textbooks");
+        jButton3.setText("See My Offerings");
 
         jLabel1.setText("All Textbooks");
 
@@ -139,17 +139,16 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(119, 119, 119)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jButton2))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
