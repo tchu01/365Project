@@ -125,7 +125,7 @@ public class Vendor {
      * @param Edition {@code int} of textbook 
      * @param Price {@code int} of textbook for this vendor
     */
-    public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, int Price) {
+    public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, double Price) {
         if(textbookExists(ISBN)) {
             addExistingTextbook(ISBN, Price);
         }
@@ -155,7 +155,7 @@ public class Vendor {
      * @param ISBN {@code String} of textbook 
      * @param Price {@code int} of textbook for this vendor
     */
-    public void addExistingTextbook(String ISBN, int Price) {
+    public void addExistingTextbook(String ISBN, double Price) {
         try {
             int ret;
             Statement statement = connect.createStatement();
@@ -242,7 +242,7 @@ public class Vendor {
      * @param ISBN {@code String} of textbook 
      * @param Price {@code int} of textbook 
     */
-    public void updatePrice(String ISBN, int Price) {
+    public void updatePrice(String ISBN, double Price) {
         try {
             Statement statement = connect.createStatement();
             String q1 = "UPDATE VendorArchive SET Price = \"" + Price+ "\" WHERE Vendor_ID = \"" + this.Vendor_ID+ "\" AND ISBN = \"" + ISBN + "\";";

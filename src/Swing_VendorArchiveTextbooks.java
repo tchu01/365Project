@@ -52,7 +52,7 @@ public class Swing_VendorArchiveTextbooks extends javax.swing.JPanel {
                 int selectedRow = jTable1.getSelectedRow();
                 String ISBN = (String) jTable1.getValueAt(selectedRow, 0);
                 String priceString = JOptionPane.showInputDialog("Enter Price", null);
-                int price = Integer.valueOf(priceString);
+                double price = Double.valueOf(priceString);
                 v.updatePrice(ISBN, price);
                 refreshTable();
             }

@@ -141,7 +141,7 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
                 
                 try {
                     int Edition = Integer.parseInt(EditionString);
-                    int Price = Integer.parseInt(PriceString);
+                    double Price = Double.parseDouble(PriceString);
                     if(v.textbookExists((String) ISBN)) {
                         JOptionPane.showMessageDialog(frame, "This textbook already exists");
                         jTextField1.setText("");

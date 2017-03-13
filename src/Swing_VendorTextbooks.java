@@ -49,7 +49,7 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
                             JOptionPane.showMessageDialog(frame, "This textbook already exists");
                             return;
                         }
-                        int price = Integer.parseInt(priceString);
+                        double price = Double.parseDouble(priceString);
                         v.addExistingTextbook((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0), price);
                         ((Swing_VendorArchiveTextbooks) panelCont.getComponent(2)).refreshTable();
                     } catch (NumberFormatException e) {
