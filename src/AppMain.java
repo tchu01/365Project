@@ -18,8 +18,6 @@ public class AppMain {
   JPanel panelCont = new JPanel();
   CardLayout cl = new CardLayout();
 
-    // JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
-    // JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
   JPanel Home = new Swing_Home(frame, panelCont, cl);
   JPanel profLogin = new Swing_ProfessorLogin(frame, panelCont, cl);
   JPanel studentLogin = new Swing_StudentLogin(frame, panelCont, cl);
