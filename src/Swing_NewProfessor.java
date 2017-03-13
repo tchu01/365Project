@@ -17,6 +17,12 @@ import javax.swing.JOptionPane;
  * @author nyee
  */
 public class Swing_NewProfessor extends javax.swing.JPanel {
+  public static Professor prof;
+    JPanel ProfessorCourses;
+    JPanel ProfessorNewCourse;
+    JPanel ProfessorRequiredBooks;
+    JPanel ProfessorTextbooks;
+    JPanel ProfessorNewTextbook;
 
     /**
      * Creates new form Swing_ProfessorLogin
@@ -27,7 +33,32 @@ public class Swing_NewProfessor extends javax.swing.JPanel {
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                cl.show(panelCont, "ProfessorCourses");
+
+			  String name = nameInput.getText();
+			  String email = emailInput.getText();
+			  String dept = deptInput.getText();
+
+			  System.out.println("Adding prof " + name + " " + email + " " + " " + dept);
+
+
+			  prof = new Professor(AppMain.connect, name, email, dept);
+
+			  ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
+			  ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
+			  ProfessorRequiredBooks = new Swing_ProfessorRequiredBooks(prof, frame,
+																		panelCont, cl);
+			  ProfessorTextbooks = new Swing_ProfessorTextbooks(prof, frame, panelCont,
+																cl);
+			  ProfessorNewTextbook = new Swing_ProfessorNewTextbook(prof, frame, panelCont,
+																	cl);
+
+			  panelCont.add(ProfessorCourses, "ProfessorCourses");
+			  panelCont.add(ProfessorRequiredBooks, "ProfessorRequiredBooks");
+			  panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
+			  panelCont.add(ProfessorTextbooks, "ProfessorTextbooks");
+			  panelCont.add(ProfessorNewTextbook, "ProfessorNewTextbook");
+
+			  cl.show(panelCont, "ProfessorCourses");
             }
         });
     }
