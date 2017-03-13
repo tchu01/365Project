@@ -17,13 +17,16 @@ public class Swing_VendorExample {
     CardLayout cl = new CardLayout();
 
     JPanel VendorTextbooks = new Swing_VendorTextbooks(v, frame, panelCont, cl);
-    JPanel VendorNewTextbook = new Swing_VendorNewTextbook2(v, frame, panelCont, cl);
+    JPanel VendorNewTextbook = new Swing_VendorNewTextbook(v, frame, panelCont, cl);
+    JPanel VendorArchiveTextbooks = new Swing_VendorArchiveTextbooks(v, frame, panelCont, cl);
+
 
     public Swing_VendorExample() {
         panelCont.setLayout(cl);
 
         panelCont.add(VendorTextbooks, "VendorTextbooks");
         panelCont.add(VendorNewTextbook, "VendorNewTextbook");
+        panelCont.add(VendorArchiveTextbooks, "VendorArchiveTextbooks");
         cl.show(panelCont, "VendorTextbooks");
 
         frame.add(panelCont);

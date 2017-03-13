@@ -144,7 +144,7 @@ public class Vendor {
     }
 
     /**
-     * Addsa new VendorArchive tuple that shows that this vendor owns an existing textbook
+     * Adds a new VendorArchive tuple that shows that this vendor owns an existing textbook
      * @param ISBN {@code String} of textbook 
      * @param Price {@code int} of textbook for this vendor
     */
@@ -188,6 +188,25 @@ public class Vendor {
             Database.printSQLException(e);
         }
 
+        return false;
+    }
+
+    public boolean alreadyOffersTextbook(String ISBN) {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT * FROM VendorArchive VA WHERE VA.ISBN = \"" + ISBN + "\";";
+            rs = statement.executeQuery(q1);
+            if (rs.next()) {
+                statement.close();
+                rs.close();
+                return true;
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
         return false;
     }
 
