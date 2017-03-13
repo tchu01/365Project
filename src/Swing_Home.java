@@ -33,7 +33,23 @@ public class Swing_Home extends javax.swing.JPanel {
         profBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-			  cl.show(panelCont, "ProfessorCourses");
+			  cl.show(panelCont, "ProfessorLogin");
+            }
+		  });
+
+        StudentBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+			  System.out.println("Student Login here");
+			  //cl.show(panelCont, "ProfessorLogin");
+            }
+		  });
+
+		vendorBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+			  System.out.println("Vendor Login here");
+			  //cl.show(panelCont, "ProfessorLogin");
             }
 		  });
 
@@ -52,9 +68,16 @@ public class Swing_Home extends javax.swing.JPanel {
         profBtn = new javax.swing.JButton();
         vendorBtn = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(600, 500));
+
         StudentBtn.setText("Student");
 
         profBtn.setText("Professor");
+        profBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profBtnActionPerformed(evt);
+            }
+        });
 
         vendorBtn.setText("Vendor");
 
@@ -63,25 +86,29 @@ public class Swing_Home extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vendorBtn)
-                    .addComponent(profBtn)
-                    .addComponent(StudentBtn))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addGap(115, 115, 115)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(StudentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(profBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(vendorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(StudentBtn)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(207, Short.MAX_VALUE)
+                .addComponent(StudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(profBtn)
+                .addComponent(profBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vendorBtn)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addComponent(vendorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void profBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_profBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
