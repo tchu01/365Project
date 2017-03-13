@@ -6,16 +6,21 @@ public class Student {
 	static ResultSet rs;
 	private static Statement statement;
 	private String student_name;
+        private int student_ID;
+        private static String dept;
+        private static String courseID;
 
 	public Student(Connection connect, int student_ID){
         try {
         	this.con = connect;
-            this.statement = connect.createStatement();
+                this.student_ID = student_ID;
+                this.statement = connect.createStatement();
 
            findStudent(connect,student_ID);
         } 
 
         catch (SQLException e) {
+            System.out.println("OH NO");
             Database.printSQLException(e);
         }
     }
@@ -66,7 +71,18 @@ public class Student {
 		return studentExists;
 	}
 
-	
+	public void setCourseInfo(String dept, String courseID){
+            this.dept = dept;
+            this.courseID = courseID;
+            System.out.println("successful set");
+        }
+        
+        public String getDept(){
+            return this.dept;
+        }
+        public String getCourseID(){
+            return this.courseID;
+        }
 	//If student doesn't exist, makes a new student and gets their customer_ID. If Customer_ID = -1, means customer wasn't successfully made.
 	//Needs to be called by MAIN.
 	public int makeNewStudent(String name, String phone, String street, String city, String state, String zip){
@@ -164,8 +180,28 @@ public class Student {
 			e.printStackTrace();
 		}
 		
-		return result;
-
-		
+		return result;	
 	}
+        
+        
+        public SQLTableModel getCoursesTableModel(String dept, String course_ID) {
+        try {
+            ResultSet rs;
+            Statement statement = con.createStatement();
+            String query = "SELECT c.Department, c.Course_Number, c.Professor_ID, p.Professor_Name FROM Course c, Professor p WHERE c.Department = '" + dept + "' AND c.Course_Number = " + course_ID + ";" ;
+            System.out.println(query);
+            rs = statement.executeQuery(query);
+
+            SQLTableModel table = new SQLTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
+            
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
+        return null;
+    }
+
 }
