@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Swing_VendorArchiveTextbooks extends javax.swing.JPanel {
     Vendor v;
-    ProfessorCoursesTableModel model;
+    SQLTableModel model;
     /**
      * Creates new form VendorArchiveTextbooks
      */

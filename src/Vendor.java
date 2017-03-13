@@ -12,7 +12,6 @@ public class Vendor {
     private String Street;
     private String State;
     private String Zip_Code;
-    //TODO Consider adding a lastTextbook variable where I store values in a textbook object for my addNewTextbook's first if
 
     /**
      * Constructor for an existing vendor in the Vendor table
@@ -72,14 +71,18 @@ public class Vendor {
         }
     }
 
-    public ProfessorCoursesTableModel getAllTextbooksTableModel() {
+    /**
+     * Method that creates a new tableModel of all textbooks to be used by swing
+     * @return SQLTableModel
+    */
+    public SQLTableModel getAllTextbooksTableModel() {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
             String q1 = "SELECT T.ISBN, T.Title, T.Author, T.Edition FROM Textbook T, VendorArchive VA WHERE T.ISBN = VA.ISBN;";
             rs = statement.executeQuery(q1);
 
-            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+           SQLTableModel table = new SQLTableModel(rs);
             // statement.close();
             // rs.close();
             return table;
@@ -89,14 +92,19 @@ public class Vendor {
 
         return null;
     }
-    public ProfessorCoursesTableModel getVendorTextbookTableModel() {
+
+    /**
+     * Method that creates a new tableModel of this vendor's textbooks to be used by swing
+     * @return SQLTableModel
+    */
+    public SQLTableModel getVendorTextbookTableModel() {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
             String q1 = "SELECT T.ISBN, T.Title, T.Author, T.Edition, VA.Price FROM Textbook T, VendorArchive VA WHERE T.ISBN = VA.ISBN AND VA.Vendor_ID = " + Vendor_ID + ";";
             rs = statement.executeQuery(q1);
 
-            ProfessorCoursesTableModel table = new ProfessorCoursesTableModel(rs);
+            SQLTableModel table = new SQLTableModel(rs);
             // statement.close();
             // rs.close();
             return table;
@@ -117,7 +125,6 @@ public class Vendor {
      * @param Edition {@code int} of textbook 
      * @param Price {@code int} of textbook for this vendor
     */
-    //TODO: Consider checking to see if the Title, Subject, Author, and Edition match to make sure that they got the right ISBN
     public void addNewTextbook(String ISBN, String Title, String Subject, String Author, int Edition, int Price) {
         if(textbookExists(ISBN)) {
             addExistingTextbook(ISBN, Price);
@@ -191,6 +198,10 @@ public class Vendor {
         return false;
     }
 
+    /**
+     * Method that creates a new tableModel of all textbooks to be used by swing
+     * @return SQLTableModel
+    */
     public boolean alreadyOffersTextbook(String ISBN) {
         try {
             ResultSet rs;
@@ -210,7 +221,10 @@ public class Vendor {
         return false;
     }
 
-
+    /**
+     * Deletes tuple in VendorArchive that shows that this vendor offer a particular textbook
+     * @param ISBN {@code String} of textbook 
+    */
     public void deleteOffering(String ISBN) {
         try {
             Statement statement = connect.createStatement();
@@ -223,6 +237,11 @@ public class Vendor {
         }
     }
 
+    /**
+     * Updates the price in VendorArchive for this vendor's offering of a particular textbook
+     * @param ISBN {@code String} of textbook 
+     * @param Price {@code int} of textbook 
+    */
     public void updatePrice(String ISBN, int Price) {
         try {
             Statement statement = connect.createStatement();

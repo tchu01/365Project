@@ -142,19 +142,15 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
                 try {
                     int Edition = Integer.parseInt(EditionString);
                     int Price = Integer.parseInt(PriceString);
-                    if(v.alreadyOffersTextbook((String) ISBN)) {
-                            JOptionPane.showMessageDialog(frame, "You already offer this textBook");
-                            return;
+                    if(v.textbookExists((String) ISBN)) {
+                        JOptionPane.showMessageDialog(frame, "This textbook already exists");
+                        jTextField1.setText("");
+                        return;
                     }
                     v.addNewTextbook(ISBN, Title, Subject, Author, Edition, Price);
                 
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
-                    jTextField4.setText("");
-                    jTextField5.setText("");
-                    jTextField6.setText("");
-                
+                    resetTextFields();
+                    
                     //getComponent(0) refers to the first component inside of panelCont, which should be Swing_ProfessorCourses
                     ((Swing_VendorTextbooks) panelCont.getComponent(0)).refreshTable();
                     ((Swing_VendorArchiveTextbooks) panelCont.getComponent(2)).refreshTable();
@@ -164,6 +160,23 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
                 }
             }
         });
+        
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                cl.show(panelCont, "VendorTextbooks");
+                resetTextFields();
+            }
+        });
+    }
+    
+    public void resetTextFields() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
     }
 
     /**
@@ -188,6 +201,7 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setText("IBSN");
 
@@ -226,6 +240,8 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
 
         jButton1.setText("Submit");
 
+        jButton2.setText("Back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -252,11 +268,15 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,6 +312,7 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
