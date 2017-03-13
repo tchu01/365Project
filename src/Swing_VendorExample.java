@@ -72,7 +72,6 @@ public class Swing_VendorExample {
 
     public static void main(String[] args) {
         try {
-            System.out.println("Hello");
             Class.forName("com.mysql.jdbc.Driver");
             String jdbc = "jdbc:mysql://localhost:3306/365Project?autoReconnect=true&useSSL=false";
             connect = DriverManager.getConnection(jdbc, "root", "");
