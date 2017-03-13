@@ -12,7 +12,9 @@ public class AppMain {
     public static Connection connect;
 
   //FIX LATER
-  Student stud;
+  Student stud = new Student(AppMain.connect, 1);
+ 
+
   
   JFrame frame = new JFrame("CardLayout");
   JPanel panelCont = new JPanel();
@@ -29,7 +31,6 @@ public class AppMain {
 
     public AppMain() {
         panelCont.setLayout(cl);
-
 
         panelCont.add(profLogin, "ProfessorLogin");
         panelCont.add(studentLogin, "StudentLogin");
