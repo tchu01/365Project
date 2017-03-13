@@ -9,22 +9,25 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class AppMain {
-    static Connection connect;
-    static Professor prof;
+    public static Connection connect;
 
-    JFrame frame = new JFrame("CardLayout");
-    JPanel panelCont = new JPanel();
-    CardLayout cl = new CardLayout();
+  JFrame frame = new JFrame("CardLayout");
+  JPanel panelCont = new JPanel();
+  CardLayout cl = new CardLayout();
 
-    JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
-    JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
+    // JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
+    // JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
   JPanel Home = new Swing_Home(frame, panelCont, cl);
+  JPanel profLogin = new Swing_ProfessorLogin(frame, panelCont, cl);
+  JPanel newProf = new Swing_NewProfessor(frame, panelCont, cl);
 
     public AppMain() {
         panelCont.setLayout(cl);
 
-        panelCont.add(ProfessorCourses, "ProfessorCourses");
-        panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
+
+        panelCont.add(profLogin, "ProfessorLogin");
+        panelCont.add(newProf, "NewProfessor");
+
         panelCont.add(Home, "Home");
 
         cl.show(panelCont, "Home");
@@ -78,12 +81,12 @@ public class AppMain {
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
-            if(Professor.IDExists(connect, 1)) {
-                prof = new Professor(connect, 1);
-            } else {
-                System.err.println("No professor");
-                System.exit(-1);
-            }
+            // if(Professor.IDExists(connect, 1)) {
+            //     prof = new Professor(connect, 1);
+            // } else {
+            //     System.err.println("No professor");
+            //     System.exit(-1);
+            // }
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
