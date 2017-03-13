@@ -195,7 +195,7 @@ public class Vendor {
         try {
             ResultSet rs;
             Statement statement = connect.createStatement();
-            String q1 = "SELECT * FROM VendorArchive VA WHERE VA.ISBN = \"" + ISBN + "\";";
+            String q1 = "SELECT * FROM VendorArchive VA WHERE VA.Vendor_ID = \"" + this.Vendor_ID+ "\" AND VA.ISBN = \"" + ISBN + "\";";
             rs = statement.executeQuery(q1);
             if (rs.next()) {
                 statement.close();
@@ -208,6 +208,31 @@ public class Vendor {
             Database.printSQLException(e);
         }
         return false;
+    }
+
+
+    public void deleteOffering(String ISBN) {
+        try {
+            Statement statement = connect.createStatement();
+            String q1 = "DELETE FROM VendorArchive WHERE Vendor_ID = \"" + this.Vendor_ID+ "\" AND ISBN = \"" + ISBN + "\";";
+            statement.executeUpdate(q1);
+            statement.close();
+            connect.commit();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+    }
+
+    public void updatePrice(String ISBN, int Price) {
+        try {
+            Statement statement = connect.createStatement();
+            String q1 = "UPDATE VendorArchive SET Price = \"" + Price+ "\" WHERE Vendor_ID = \"" + this.Vendor_ID+ "\" AND ISBN = \"" + ISBN + "\";";
+            statement.executeUpdate(q1);
+            statement.close();
+            connect.commit();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
     }
 
     /**
