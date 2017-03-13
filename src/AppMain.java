@@ -88,7 +88,36 @@ public class AppMain {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
+            // String jdbc = "jdbc:mysql://localhost:3306/project?user=nyee&useSSL=true";
+
+			/*
+			 * NOTE:
+			 *
+			 * HEY LOOK HERE FIRST BEFORE YOU CHANGE THE LINE ABOVE
+			 *
+			 * To stop having to change the db line above set an environment variable called
+			 * APPMAINDB with the jdbc.
+			 *
+			 * Do this in the terminal:
+			 * export APPMAINDB="YOUR DB"
+			 *
+			 * ex/ export APPMAINDB="jdbc:mysql://localhost:3306/project?user=nyee&useSSL=true"
+			 *
+			 * If this does not work ignore this and just set the jdbc variable like before and
+			 * let me know
+			 *
+			 * Nathan ;)
+			 *
+			 */
+
+			String jdbc = System.getenv("APPMAINDB");
+
+			if (jdbc == null) {
+			  System.out.println("You did not read my note!!!!");
+			  System.out.println("Do this in the terminal: export APPMAINDB=\"YOUR DB\"");
+			  System.exit(0);
+			}
+
             connect = DriverManager.getConnection(jdbc);
             connect.setAutoCommit(false);
 
