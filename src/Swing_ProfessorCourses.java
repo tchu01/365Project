@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 public class Swing_ProfessorCourses extends javax.swing.JPanel {
     Professor prof;
     SQLTableModel model;
+    String Department;
+    int Course_Number;
 
     /**
      * Creates new form Swing_ProfessorCourses
@@ -22,7 +24,6 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
 
         model = prof.getProfessorCoursesTableModel();
         jTable1.setModel(model);
-
 
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -37,10 +38,24 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
                 if(jTable1.getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(frame, "No row selected!");
                 } else {
-                    System.out.println("Department: " + jTable1.getValueAt(jTable1.getSelectedRow(), 0) + ", Course_Num: " + jTable1.getValueAt(jTable1.getSelectedRow(), 1)+ ", Professor: " + jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+                    Department = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+                    Course_Number = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+
+                    System.out.println("Department: " + jTable1.getValueAt(jTable1.getSelectedRow(), 0) + ", Course_Num: " + jTable1.getValueAt(jTable1.getSelectedRow(), 1) + ", Professor: " + jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+
+                    cl.show(panelCont, "ProfessorTextbooks");
                 }
             }
         });
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                cl.show(panelCont, "ProfessorRequiredBooks");
+            }
+        });
+
+        jLabel2.setText("Hello " + prof.getProfessor_Name() + " (ID: " + prof.get_ID() + ")");
     }
 
     public void refreshTable() {
@@ -63,6 +78,9 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(600, 500));
         setRequestFocusEnabled(false);
@@ -92,37 +110,57 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
 
         jButton2.setText("Select Highlighted Course");
 
+        jButton3.setText("See My Assigned Textbooks");
+        jButton3.setToolTipText("");
+        jButton3.setActionCommand("");
+
+        jLabel2.setText("Hello Name");
+
+        jButton4.setText("Logout");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton2))
+                                                .addComponent(jButton4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel2)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(35, 35, 35)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jScrollPane1)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jButton3)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(jButton2))
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(jLabel1)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
-                                                                .addComponent(jButton1)))))
-                                .addGap(35, 35, 35))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(jButton1)))
+                                                .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton4)
+                                        .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
                                         .addComponent(jButton1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
-                                .addContainerGap(45, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton2)
+                                        .addComponent(jButton3))
+                                .addGap(20, 20, 20))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("ExistingCourses");
@@ -134,7 +172,10 @@ public class Swing_ProfessorCourses extends javax.swing.JPanel {
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

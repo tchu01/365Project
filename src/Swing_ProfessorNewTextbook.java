@@ -1,14 +1,152 @@
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author timothy
  */
 public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
+    Professor prof;
+    SQLTableModel model;
 
     /**
      * Creates new form Swing_ProfessorNewTextbook
      */
-    public Swing_ProfessorNewTextbook() {
+    public Swing_ProfessorNewTextbook(Professor prof, JFrame frame, JPanel panelCont, CardLayout cl) {
         initComponents();
+
+        jTextField1.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jTextField2.requestFocus();
+                }
+            }
+        });
+
+        jTextField2.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jTextField3.requestFocus();
+                }
+            }
+        });
+
+        jTextField3.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jTextField4.requestFocus();
+                }
+            }
+        });
+
+        jTextField4.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jTextField5.requestFocus();
+                }
+            }
+        });
+
+
+        jTextField5.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton1.requestFocus();
+                }
+            }
+        });
+
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                String ISBN = jTextField1.getText();
+                String Title = jTextField2.getText();
+                String Subject = jTextField3.getText();
+                String Author = jTextField4.getText();
+                String Edition = jTextField5.getText();
+
+                //if(ISBN.length() == 13) {
+                if(prof.textbookExists(ISBN)) {
+                    System.out.println("Textbook already exists!");
+                } else {
+                    try {
+                        int ed = Integer.parseInt(Edition);
+                        prof.addTextbook(ISBN, Title, Subject, Author, ed);
+
+                        jTextField1.setText("");
+                        jTextField2.setText("");
+                        //getComponent(0) refers to the first component inside of panelCont, which should be Swing_ProfessorCourses
+                        ((Swing_ProfessorTextbooks) panelCont.getComponent(3)).refreshTable();
+
+                        cl.show(panelCont, "ProfessorTextbooks");
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(frame, "Edition must be a number!");
+                    }
+                }
+                //} else {
+                //    JOptionPane.showMessageDialog(frame, "ISBN must be exactly 13 digits!");
+                //}
+            }
+        });
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                cl.show(panelCont, "ProfessorTextbooks");
+            }
+        });
+
     }
 
     /**
@@ -31,6 +169,7 @@ public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setText("ISBN:");
 
@@ -52,7 +191,9 @@ public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
 
         jTextField5.setToolTipText("Edition number of textbook");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Create New Textbook");
+
+        jButton2.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,8 +215,10 @@ public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
                                                                                         .addComponent(jLabel2)
                                                                                         .addGap(49, 49, 49)))
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(jLabel3)
-                                                                                .addGap(28, 28, 28)))
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(jLabel3)
+                                                                                        .addComponent(jButton2))
+                                                                                .addGap(12, 12, 12)))
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(jLabel4)
                                                                         .addGap(32, 32, 32)))
@@ -93,7 +236,9 @@ public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
+                                .addGap(24, 24, 24)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -113,15 +258,16 @@ public class Swing_ProfessorNewTextbook extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel5)
                                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1)
-                                .addContainerGap(103, Short.MAX_VALUE))
+                                .addContainerGap(84, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
