@@ -106,7 +106,7 @@ public class Professor {
         return null;
     }
 
-    public void addTextbook(String Department, int Course_Number, String ISBN, String Title, String Subject, String Author, int Edition) {
+    public void addTextbook(String ISBN, String Title, String Subject, String Author, int Edition) {
         try {
             int ret;
             Statement statement = connect.createStatement();
@@ -142,12 +142,44 @@ public class Professor {
         return false;
     }
 
+    public SQLTableModel getProfessorTextbooksTableModel() {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT * FROM Textbook T;";
+            rs = statement.executeQuery(q1);
+
+            SQLTableModel table = new SQLTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
+        return null;
+    }
+
     public void addRequiredBook(String Department, int Course_Number, String ISBN) {
         try {
             int ret;
             Statement statement = connect.createStatement();
             String q1 = "INSERT INTO RequiredBook (Department, Course_Number, Professor_ID, Textbook_Required) ";
             q1 += "VALUES (\"" + Department + "\", " + Course_Number + ", " + Professor_ID + ", \"" + ISBN + "\");";
+            ret = statement.executeUpdate(q1);
+
+            statement.close();
+            this.connect.commit();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+    }
+
+    public void deleteRequiredBook(String Department, int Course_Number, String ISBN) {
+        try {
+            int ret;
+            Statement statement = connect.createStatement();
+            String q1 = "DELETE FROM RequiredBook WHERE Department = \"" + Department + "\" AND Course_Number = " + Course_Number + " AND Professor_ID = " + Professor_ID + " AND Textbook_Required = \"" + ISBN + "\";";
             ret = statement.executeUpdate(q1);
 
             statement.close();
@@ -176,6 +208,24 @@ public class Professor {
         }
 
         return false;
+    }
+
+    public SQLTableModel getProfessorRequiredBooksTableModel() {
+        try {
+            ResultSet rs;
+            Statement statement = connect.createStatement();
+            String q1 = "SELECT * FROM RequiredBook RB WHERE RB.Professor_ID = " + Professor_ID + ";";
+            rs = statement.executeQuery(q1);
+
+            SQLTableModel table = new SQLTableModel(rs);
+            // statement.close();
+            // rs.close();
+            return table;
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+
+        return null;
     }
 
     public void sqltemplate() {

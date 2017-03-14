@@ -70,7 +70,7 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
                         jTextField1.setText("");
                         jTextField2.setText("");
                         //getComponent(0) refers to the first component inside of panelCont, which should be Swing_ProfessorCourses
-                        ((Swing_ProfessorCourses) panelCont.getComponent(0)).refreshTable();
+                        ((Swing_ProfessorCourses) panelCont.getComponent(8)).refreshTable();
 
                         cl.show(panelCont, "ProfessorCourses");
                     } catch (NumberFormatException e) {
@@ -79,6 +79,13 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(frame, "Departments and course numbers are 3 characters long!");
                 }
+            }
+        });
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                cl.show(panelCont, "ProfessorCourses");
             }
         });
     }
@@ -97,6 +104,7 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(600, 500));
 
@@ -110,6 +118,9 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
         jTextField1.setToolTipText("ie: CPE");
 
         jTextField2.setToolTipText("ie: 101");
+
+        jButton2.setText("Back");
+        jButton2.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,11 +139,17 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
                                                 .addGap(50, 50, 50)
                                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(174, 174, 174))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,13 +159,14 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)
-                                .addContainerGap(340, Short.MAX_VALUE))
+                                .addContainerGap(312, Short.MAX_VALUE))
         );
     }// </editor-fold>
 
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;

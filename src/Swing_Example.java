@@ -17,13 +17,19 @@ public class Swing_Example {
     CardLayout cl = new CardLayout();
 
     JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
+    JPanel ProfessorRequiredBooks = new Swing_ProfessorRequiredBooks(prof, frame, panelCont, cl);
     JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
+    JPanel ProfessorTextbooks = new Swing_ProfessorTextbooks(prof, frame, panelCont, cl);
+    JPanel ProfessorNewTextbook = new Swing_ProfessorNewTextbook(prof, frame, panelCont, cl);
 
     public Swing_Example() {
         panelCont.setLayout(cl);
 
         panelCont.add(ProfessorCourses, "ProfessorCourses");
+        panelCont.add(ProfessorRequiredBooks, "ProfessorRequiredBooks");
         panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
+        panelCont.add(ProfessorTextbooks, "ProfessorTextbooks");
+        panelCont.add(ProfessorNewTextbook, "ProfessorNewTextbook");
         cl.show(panelCont, "ProfessorCourses");
 
         frame.add(panelCont);

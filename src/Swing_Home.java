@@ -40,8 +40,7 @@ public class Swing_Home extends javax.swing.JPanel {
         StudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-			  System.out.println("Student Login here");
-			  //cl.show(panelCont, "ProfessorLogin");
+                    cl.show(panelCont, "StudentLogin");
             }
 		  });
 
