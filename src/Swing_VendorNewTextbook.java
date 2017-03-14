@@ -151,8 +151,8 @@ public class Swing_VendorNewTextbook extends javax.swing.JPanel {
                 
                     resetTextFields();
                     
-                    ((Swing_VendorTextbooks) panelCont.getComponent(10)).refreshTable();
-                    ((Swing_VendorArchiveTextbooks) panelCont.getComponent(12)).refreshTable();
+                    ((Swing_VendorTextbooks) panelCont.getComponent(6)).refreshTable();
+                    ((Swing_VendorArchiveTextbooks) panelCont.getComponent(8)).refreshTable();
                     cl.show(panelCont, "VendorTextbooks");
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Edition and Price must be numbers!");

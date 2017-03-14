@@ -43,9 +43,9 @@ public class Swing_VendorLogin extends javax.swing.JPanel {
 				JPanel VendorNewTextbook = new Swing_VendorNewTextbook(v, frame, panelCont, cl);
 				JPanel VendorArchiveTextbooks = new Swing_VendorArchiveTextbooks(v, frame, panelCont, cl);
 
-				panelCont.add(VendorTextbooks, "VendorTextbooks"); //10
-				panelCont.add(VendorNewTextbook, "VendorNewTextbook"); //11
-				panelCont.add(VendorArchiveTextbooks, "VendorArchiveTextbooks"); //12
+				panelCont.add(VendorTextbooks, "VendorTextbooks"); //6
+				panelCont.add(VendorNewTextbook, "VendorNewTextbook"); //7
+				panelCont.add(VendorArchiveTextbooks, "VendorArchiveTextbooks"); //8
 				cl.show(panelCont, "VendorTextbooks");
 
 				} else {
