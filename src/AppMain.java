@@ -26,7 +26,10 @@ public class AppMain {
   JPanel existingStudent = new Swing_ExistingStudent(stud, frame, panelCont, cl);
   JPanel enterCourses = new Swing_EnterCourse(stud, frame, panelCont, cl);
   JPanel displayCourses = new Swing_DisplayCourses(stud, frame, panelCont, cl);
-
+  
+  JPanel vendorLogin = new Swing_VendorLogin(frame, panelCont, cl);
+  JPanel newVendor = new Swing_NewVendor(frame, panelCont, cl);
+   
     public AppMain() {
         panelCont.setLayout(cl);
 
@@ -38,7 +41,10 @@ public class AppMain {
         panelCont.add(existingStudent, "existingStudent");
         panelCont.add(enterCourses, "EnterCourses");
         panelCont.add(displayCourses, "DisplayCourses");
-
+        
+        panelCont.add(vendorLogin, "VendorLogin"); //index 7
+        panelCont.add(newVendor, "NewVendor"); //index 8
+        
         panelCont.add(Home, "Home");
 
         cl.show(panelCont, "Home");
@@ -119,6 +125,7 @@ public class AppMain {
 			}
 
             connect = DriverManager.getConnection(jdbc);
+            //connect = DriverManager.getConnection(jdbc, "root", "");
             connect.setAutoCommit(false);
 
             // if(Professor.IDExists(connect, 1)) {

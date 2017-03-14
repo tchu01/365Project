@@ -20,7 +20,7 @@ class VendorTester {
                 System.out.println(Vendor.IDExists(connect, 2));
                 System.out.println(Vendor.nextID(connect));
             }
-            Vendor v2 = new Vendor(connect, "Charlie", "2222222222", "Louis", "CA", "94340");
+            //Vendor v2 = new Vendor(connect, "Charlie", "2222222222", "Louis", "CA", "94340");
 
 
 

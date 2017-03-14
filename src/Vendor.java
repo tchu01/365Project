@@ -10,6 +10,7 @@ public class Vendor {
     private String Vendor_Name;
     private String Phone_Number;
     private String Street;
+    private String City;
     private String State;
     private String Zip_Code;
 
@@ -29,6 +30,7 @@ public class Vendor {
             this.Vendor_Name = rs.getString("Vendor_Name");
             this.Phone_Number = rs.getString("Phone_Number");
             this.Street = rs.getString("Street");
+            this.City = rs.getString("City");
             this.State = rs.getString("State");
             this.Zip_Code = rs.getString("Zip_Code");
 
@@ -48,12 +50,13 @@ public class Vendor {
      * @param State {@code String}
      * @param Zip_Code {@code String}
     */
-    public Vendor(Connection connect, String Vendor_Name, String Phone_Number, String Street, String State, String Zip_Code) {
+    public Vendor(Connection connect, String Vendor_Name, String Phone_Number, String Street, String City, String State, String Zip_Code) {
         this.connect = connect;
         this.Vendor_ID = nextID(connect);
         this.Vendor_Name = Vendor_Name;
         this.Phone_Number = Phone_Number;
         this.Street = Street;
+        this.City = City;
         this.State = State;
         this.Zip_Code = Zip_Code;
 
@@ -61,7 +64,7 @@ public class Vendor {
             int ret;
             Statement statement = connect.createStatement();
             String q1 = "INSERT INTO Vendor (Vendor_ID, Vendor_Name, Phone_Number, Street, City, State, Zip_Code) ";
-            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\", \"" + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
+            q1 += "VALUES (\"" + this.Vendor_ID + "\", \"" + this.Vendor_Name + "\", \"" + this.Phone_Number + "\", \"" + this.Street + "\", \"" + this.City + "\", \"" + this.State + "\", "+ this.Zip_Code + ");";
             ret = statement.executeUpdate(q1);
 
             statement.close();
@@ -334,10 +337,18 @@ public class Vendor {
 
     /**
      * Gives us this vendor's street
-     * @return Vendor_ID
+     * @return Street
     */
     public String getStreet() {
         return this.Street;
+    }
+
+    /**
+     * Gives us this vendor's city
+     * @return City
+    */
+    public String getCity() {
+        return this.City;
     }
 
     /**
