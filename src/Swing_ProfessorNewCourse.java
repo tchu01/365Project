@@ -70,7 +70,7 @@ public class Swing_ProfessorNewCourse extends javax.swing.JPanel {
                         jTextField1.setText("");
                         jTextField2.setText("");
                         //getComponent(0) refers to the first component inside of panelCont, which should be Swing_ProfessorCourses
-                        ((Swing_ProfessorCourses) panelCont.getComponent(8)).refreshTable();
+                        ((Swing_ProfessorCourses) panelCont.getComponent(10)).refreshTable();
 
                         cl.show(panelCont, "ProfessorCourses");
                     } catch (NumberFormatException e) {
