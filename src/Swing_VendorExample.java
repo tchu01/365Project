@@ -8,29 +8,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Swing_Example {
+public class Swing_VendorExample {
     static Connection connect;
-    static Professor prof;
+    static Vendor v;
 
     JFrame frame = new JFrame("CardLayout");
     JPanel panelCont = new JPanel();
     CardLayout cl = new CardLayout();
 
-    JPanel ProfessorCourses = new Swing_ProfessorCourses(prof, frame, panelCont, cl);
-    JPanel ProfessorRequiredBooks = new Swing_ProfessorRequiredBooks(prof, frame, panelCont, cl);
-    JPanel ProfessorNewCourse = new Swing_ProfessorNewCourse(prof, frame, panelCont, cl);
-    JPanel ProfessorTextbooks = new Swing_ProfessorTextbooks(prof, frame, panelCont, cl);
-    JPanel ProfessorNewTextbook = new Swing_ProfessorNewTextbook(prof, frame, panelCont, cl);
+    JPanel VendorTextbooks = new Swing_VendorTextbooks(v, frame, panelCont, cl);
+    JPanel VendorNewTextbook = new Swing_VendorNewTextbook(v, frame, panelCont, cl);
+    JPanel VendorArchiveTextbooks = new Swing_VendorArchiveTextbooks(v, frame, panelCont, cl);
 
-    public Swing_Example() {
+
+    public Swing_VendorExample() {
         panelCont.setLayout(cl);
 
-        panelCont.add(ProfessorCourses, "ProfessorCourses");
-        panelCont.add(ProfessorRequiredBooks, "ProfessorRequiredBooks");
-        panelCont.add(ProfessorNewCourse, "ProfessorNewCourse");
-        panelCont.add(ProfessorTextbooks, "ProfessorTextbooks");
-        panelCont.add(ProfessorNewTextbook, "ProfessorNewTextbook");
-        cl.show(panelCont, "ProfessorCourses");
+        panelCont.add(VendorTextbooks, "VendorTextbooks");
+        panelCont.add(VendorNewTextbook, "VendorNewTextbook");
+        panelCont.add(VendorArchiveTextbooks, "VendorArchiveTextbooks");
+        cl.show(panelCont, "VendorTextbooks");
 
         frame.add(panelCont);
         frame.setResizable(false);
@@ -76,21 +73,22 @@ public class Swing_Example {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://localhost:3306/project?user=root&password=123";
-            connect = DriverManager.getConnection(jdbc);
+            String jdbc = "jdbc:mysql://localhost:3306/project?user=nyee&useSSL=true";
+			connect = DriverManager.getConnection(jdbc);
+            //connect = DriverManager.getConnection(jdbc, "root", "");
             connect.setAutoCommit(false);
 
-            if(Professor.IDExists(connect, 21)) {
-                prof = new Professor(connect, 21);
+            if(Vendor.IDExists(connect, 1)) {
+                v = new Vendor(connect, 1);
             } else {
-                System.err.println("No professor");
+                System.err.println("No vendor");
                 System.exit(-1);
             }
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new Swing_Example();
+                    new Swing_VendorExample();
                 }
             });
 
