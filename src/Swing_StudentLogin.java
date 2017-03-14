@@ -10,6 +10,7 @@ import javax.swing.JPanel;
  */
 public class Swing_StudentLogin extends javax.swing.JPanel {
     JPanel existingStudent;
+    JPanel newStudent;
     /**
      * Creates new form Swing_StudentLogin
      */
@@ -20,6 +21,8 @@ public class Swing_StudentLogin extends javax.swing.JPanel {
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                newStudent = new Swing_NewStudent(frame, panelCont, cl);
+                panelCont.add(newStudent, "newStudent");
                 cl.show(panelCont, "newStudent");
             }
         });
