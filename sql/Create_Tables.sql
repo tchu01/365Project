@@ -15,7 +15,7 @@ CREATE TABLE Customer (
 	Street VARCHAR(45),
 	City VARCHAR(45),
 	State VARCHAR(2),
-	Zip_Code VARCHAR(7)
+	Zip_Code VARCHAR(7) #Zip_Codes are varchar to preserve leading zeroes for NorthEast zipcodes
 );
 
 CREATE TABLE Vendor (
