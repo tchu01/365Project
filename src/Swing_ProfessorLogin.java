@@ -26,6 +26,7 @@ public class Swing_ProfessorLogin extends javax.swing.JPanel {
 
     JPanel ProfessorCourses;
     JPanel ProfessorNewCourse;
+
     JPanel ProfessorRequiredBooks;
     JPanel ProfessorTextbooks;
     JPanel ProfessorNewTextbook;

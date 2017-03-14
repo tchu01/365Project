@@ -61,8 +61,8 @@ public class Swing_Student {
         //STUDENT STUFF
         JButton newStudent = new JButton("New Student");
         JButton oldStudent = new JButton("Login with Student ID");
-        newStudent.setBounds(280,270,220, 70);//x axis, y axis, width, height
-        oldStudent.setBounds(280,400,220, 70);//x axis, y axis, width, height
+        newStudent.setBounds(280,270,220, 100);//x axis, y axis, width, height
+        oldStudent.setBounds(280,400,220, 100);//x axis, y axis, width, height
         studentSignIn.add(newStudent);
         studentSignIn.add(oldStudent);
         studentSignIn.setBackground(Color.YELLOW);

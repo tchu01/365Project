@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class AppMain {
+
 	public static Connection connect;
 
   JFrame frame = new JFrame("CardLayout");
@@ -19,10 +20,11 @@ public class AppMain {
   JPanel profLogin = new Swing_ProfessorLogin(frame, panelCont, cl);
   JPanel studentLogin = new Swing_StudentLogin(frame, panelCont, cl);
   JPanel newProf = new Swing_NewProfessor(frame, panelCont, cl);
-  JPanel newStudent = new Swing_NewStudent(stud, frame, panelCont, cl);
-  JPanel existingStudent = new Swing_ExistingStudent(stud, frame, panelCont, cl);
-  JPanel enterCourses = new Swing_EnterCourse(stud, frame, panelCont, cl);
-  JPanel displayCourses = new Swing_DisplayCourses(stud, frame, panelCont, cl);
+
+//  JPanel newStudent = new Swing_NewStudent(stud, frame, panelCont, cl);
+//  JPanel existingStudent = new Swing_ExistingStudent(stud, frame, panelCont, cl);
+//  JPanel enterCourses = new Swing_EnterCourse(stud, frame, panelCont, cl);
+//  JPanel displayCourses = new Swing_DisplayCourses(stud, frame, panelCont, cl);
 
   JPanel vendorLogin = new Swing_VendorLogin(frame, panelCont, cl);
   JPanel newVendor = new Swing_NewVendor(frame, panelCont, cl);
@@ -34,10 +36,10 @@ public class AppMain {
 		panelCont.add(profLogin, "ProfessorLogin");
 		panelCont.add(studentLogin, "StudentLogin");
 		panelCont.add(newProf, "NewProfessor");
-		panelCont.add(newStudent, "newStudent");
-		panelCont.add(existingStudent, "existingStudent");
-		panelCont.add(enterCourses, "EnterCourses");
-		panelCont.add(displayCourses, "DisplayCourses");
+		//panelCont.add(newStudent, "newStudent");
+		//panelCont.add(existingStudent, "existingStudent");
+		//panelCont.add(enterCourses, "EnterCourses");
+		//panelCont.add(displayCourses, "DisplayCourses");
 
 		panelCont.add(vendorLogin, "VendorLogin"); //index 7
 		panelCont.add(newVendor, "NewVendor"); //index 8
