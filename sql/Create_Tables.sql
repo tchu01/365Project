@@ -21,7 +21,7 @@ CREATE TABLE Customer (
 CREATE TABLE Vendor (
 	Vendor_ID INTEGER AUTO_INCREMENT PRIMARY KEY,
 	Vendor_Name VARCHAR(45) NOT NULL,
-	Phone_Number VARCHAR(45),
+	Phone_Number VARCHAR(10),
 	Street VARCHAR(45),
 	City VARCHAR(45),
 	State VARCHAR(2),
@@ -29,7 +29,7 @@ CREATE TABLE Vendor (
 );
 
 CREATE TABLE Textbook (
-	ISBN VARCHAR(13) PRIMARY KEY,
+	ISBN VARCHAR(13) PRIMARY KEY, #ISBNs are always 13 characters
 	Title VARCHAR(45) NOT NULL,
 	Subject VARCHAR(45),
 	Author VARCHAR(45),
