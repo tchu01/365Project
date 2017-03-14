@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.util.Scanner;
 
 public class AppMain {
 
@@ -118,9 +119,10 @@ public class AppMain {
 			String jdbc = System.getenv("APPMAINDB");
 
 			if (jdbc == null) {
-			  System.out.println("You did not read my note!!!!");
-			  System.out.println("Do this in the terminal: export APPMAINDB=\"YOUR DB\"");
-			  System.exit(0);
+			  System.out.print("URL to db: ");
+			  Scanner scanner = new Scanner(System.in);
+			  String db_url = scanner.nextLine();
+			  jdbc = db_url;
 			}
 
 			connect = DriverManager.getConnection(jdbc);
