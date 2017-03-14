@@ -73,8 +73,9 @@ public class Swing_VendorExample {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://localhost:3306/365Project?autoReconnect=true&useSSL=false";
-            connect = DriverManager.getConnection(jdbc, "root", "");
+            String jdbc = "jdbc:mysql://localhost:3306/project?user=nyee&useSSL=true";
+			connect = DriverManager.getConnection(jdbc);
+            //connect = DriverManager.getConnection(jdbc, "root", "");
             connect.setAutoCommit(false);
 
             if(Vendor.IDExists(connect, 1)) {
