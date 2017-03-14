@@ -48,7 +48,7 @@ public class Swing_Home extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
 			  System.out.println("Vendor Login here");
-			  //cl.show(panelCont, "ProfessorLogin");
+			  cl.show(panelCont, "VendorLogin");
             }
 		  });
 
