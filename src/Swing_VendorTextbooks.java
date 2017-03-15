@@ -51,7 +51,7 @@ public class Swing_VendorTextbooks extends javax.swing.JPanel {
                         String priceString = JOptionPane.showInputDialog("Enter Price", null);
                         double price = Double.parseDouble(priceString);
                         v.addExistingTextbook((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0), price);
-                        ((Swing_VendorArchiveTextbooks) panelCont.getComponent(2)).refreshTable();
+                        ((Swing_VendorArchiveTextbooks) panelCont.getComponent(8)).refreshTable();
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(frame, "Edition and Price must be numbers!");
                     }

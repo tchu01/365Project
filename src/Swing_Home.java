@@ -47,7 +47,6 @@ public class Swing_Home extends javax.swing.JPanel {
 		vendorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-			  System.out.println("Vendor Login here");
 			  cl.show(panelCont, "VendorLogin");
             }
 		  });
